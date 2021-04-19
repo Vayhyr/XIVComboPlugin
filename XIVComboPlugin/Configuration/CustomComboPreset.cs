@@ -5,7 +5,6 @@ namespace XIVComboExpandedestPlugin
     public enum CustomComboPreset
     {
         // Last enum used: 98
-        // Unused enums: 73, 76, 77, 83, 86, 92
         // ====================================================================================
         #region DRAGOON
 
@@ -37,9 +36,11 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Delirium Feature", "Replace Souleater and Stalwart Soul with Bloodspiller and Quietus when Delirium is active", DRK.JobID, DRK.Souleater, DRK.StalwartSoul)]
         DeliriumFeature = 57,
         
-        [CustomComboInfo("Dark Knight Gauge Overcap Feature", "Replace AoE combo with gauge spender if you are about to overcap", DRK.JobID, DRK.StalwartSoul)]
+        [CustomComboInfo("Dark Knight Gauge Overcap Feature", "Replace Single-target or AoE combo with gauge spender if you are about to overcap and are before a step of a combo that would generate blood gauge", DRK.JobID, DRK.Souleater, DRK.StalwartSoul)]
         DRKOvercapFeature = 71,
 
+        [CustomComboInfo("Dark Knight MP Overcap Feature", "Weaves MP spenders between the first two steps of your combos if you are over 8000 MP.", DRK.JobID, DRK.Souleater, DRK.StalwartSoul)]
+        DRKMPOvercapFeature = 73,
 
         #endregion
         // ====================================================================================
@@ -117,7 +118,7 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Shoha Feature", "Replaces Iaijutsu/Tsubame with Shoha if gauge is capped.", SAM.JobID, SAM.Iaijutsu, SAM.Tsubame)]
         SamuraiShohaFeature = 74,
 
-        [CustomComboInfo("Tsubame to Iaijutsu Feature", "Replaces Tsubame with Iaijutsu while Sens are up.", SAM.JobID, SAM.Tsubame)]
+        [CustomComboInfo("Tsubame to Iaijutsu Feature", "Replaces Tsubame with Iaijutsu while Sens are up.\nAlso deletes Kaeshi: Higanbana from the game, good riddance.", SAM.JobID, SAM.Tsubame)]
         SamuraiTsubameFeature = 91,
 
         #endregion
@@ -170,10 +171,10 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", GNB.JobID, GNB.DemonSlaughter)]
         GunbreakerDemonSlaughterCombo = 22,
 
-        [CustomComboInfo("Gunbreaker Gauge Overcap Feature", "Replace AoE combo with gauge spender if you are about to overcap", GNB.JobID, GNB.DemonSlaughter)]
+        [CustomComboInfo("Gunbreaker Gauge Overcap Feature", "Replace Single-target or AoE combo with gauge spender if you are about to overcap and are before a step of a combo that would generate powder gauge", GNB.JobID, GNB.DemonSlaughter, GNB.SolidBarrel)]
         GunbreakerGaugeOvercapFeature = 30,
 
-        [CustomComboInfo("Burst Strike to Bloodfest Feature", "Replace Burst Strike with Bloodfest if you have no powder gauge.", GNB.JobID, GNB.BurstStrike)]
+        [CustomComboInfo("Bloodfest Gauge Overcap Feature", "Replace Bloodfest with Burst Strike if it would cause you to overcap.", GNB.JobID, GNB.Bloodfest)]
         GunbreakerBloodfestOvercapFeature = 70,
 
         [CustomComboInfo("No Mercy Feature", "Replace No Mercy with Bow Shock, and then Sonic Break, while No Mercy is active.", GNB.JobID, GNB.NoMercy)]
@@ -212,7 +213,16 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", BLM.JobID, BLM.LeyLines)]
         BlackLeyLines = 56,
 
-        [CustomComboInfo("Fire 3 to Fire 1 Feature", "Fire 1 becomes Fire 3 outside of Astral Fire, and when firestarter proc is up.\nAlso replaces Enochian with Fire 3/1 before you get Fire 4 when in AF (if Enochian is up or you don't have it yet).", BLM.JobID, BLM.Enochian, BLM.Fire)]
+        [CustomComboInfo("Fire 1/3 Feature", "Fire 1 (and 3 if procced) will replace Fire 4 if below 6s (3s if Fire 3) on AF.\nEnochian Stance Switcher must be active.", BLM.JobID, BLM.Enochian)]
+        BlackFireFeature = 76,
+
+        [CustomComboInfo("Despair Feature", "Despair replaces Fire 4 when below 2400 MP.\nEnochian Stance Switcher must be active.", BLM.JobID, BLM.Enochian)]
+        BlackDespairFeature = 77,
+
+        [CustomComboInfo("Thunder Feature", "Thunder 1/3 replaces Enochian/Fire 4/Blizzard 4 when Thundercloud is up and either Thundercloud or Thunder 1/3 is about to run out, assuming it won't interrupt timer upkeep.\nEnochian Stance Switcher must be active.", BLM.JobID, BLM.Enochian)]
+        BlackThunderFeature = 86,
+
+        [CustomComboInfo("Fire 3 to Fire 1 Feature", "Fire 3 becomes Fire 1 when in Astral Fire when no Firestarter proc is up.\nAlso replaces Enochian with Fire 3/1 before you get Fire 4 when in AF (if Enochian is up or you don't have it yet).", BLM.JobID, BLM.Enochian, BLM.Fire3)]
         BlackFire3Feature = 87,
 
         [CustomComboInfo("Blizzard Condensation Feature", "Blizzard 1 becomes Blizzard 3 when out of Umbral Ice. Freeze also becomes Blizzard 2 when synced.", BLM.JobID, BLM.Blizzard, BLM.Freeze)]
@@ -246,6 +256,9 @@ namespace XIVComboExpandedestPlugin
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", SMN.JobID, SMN.Painflare)]
         SummonerESPainflareCombo = 40,
+
+        [CustomComboInfo("Egi Assault 1/2 to Ruin IV Feature", "Change Egi Assault 1/2 into Ruin IV when capped on Further Ruin, if level applies and Ifrit-Egi is out.", SMN.JobID, SMN.EgiAssault, SMN.EgiAssault2, SMN.Enkindle)]
+        SummonerRuinIVFeature = 92,
 
         [CustomComboInfo("Demi-Summon Combiners Ultra", "Dreadwyrm Trance, Summon Bahamut, Firebird Trance, Deathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button.\nRequires Demi-Summon Combiners feature.", SMN.JobID, SMN.DreadwyrmTrance)]
         SummonerDemiComboUltra = 93,
@@ -313,8 +326,8 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", BRD.JobID, BRD.HeavyShot, BRD.BurstShot)]
         BardStraightShotUpgradeFeature = 42,
 
-        [CustomComboInfo("Iron Jaws Feature", "Iron Jaws is replaced with Caustic Bite/Stormbite if one or both are not up.\nWorks for prior versions too, alternates between the two if Iron Jaws isn't available.", BRD.JobID, BRD.IronJaws)]
-        BardIronJawsFeature = 84,
+        [CustomComboInfo("One Button DoT", "Iron Jaws is replaced with Caustic Bite/Stormbite if one or both are not up.\nWorks for prior versions too, alternates between the two if Iron Jaws isn't available.", BRD.JobID, BRD.IronJaws)]
+        BardOneButtonDoT = 84,
 
         [CustomComboInfo("Burst Shot/Quick Nock into Apex Arrow", "Replaces Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID, BRD.BurstShot, BRD.QuickNock)]
         BardApexFeature = 85,
@@ -323,12 +336,16 @@ namespace XIVComboExpandedestPlugin
         // ====================================================================================
         #region MONK
 
-        [CustomComboInfo("Monk AoE Combo", "Replaces Rockbreaker with the AoE combo chain, or Rockbreaker when Perfect Balance is active.", MNK.JobID, MNK.Rockbreaker)]
+        [CustomComboInfo("Monk AoE Combo", "Replaces Rockbreaker with the AoE combo chain, or Rockbreaker when Perfect Balance is active." +
+            "\nFour-point Fury is selected if Perfect balance or Form Shift is up and Twin Snakes is below 4s." +
+            "\nTwin Snakes will also replace Four-Point Fury at any point if the buff is not up.", MNK.JobID, MNK.Rockbreaker)]
         MnkAoECombo = 54,
 
         [CustomComboInfo("Monk Bootshine Feature", "Replaces Dragon Kick with Bootshine if both a form and Leaden Fist are up.", MNK.JobID, MNK.DragonKick)]
         MnkBootshineFeature = 65,
 
+        [CustomComboInfo("Monk Demolish Feature", "Replaces Snap Punch with Demolish if Demolish is active on current target and over 6s in duration left.", MNK.JobID, MNK.SnapPunch)]
+        MnkDemolishFeature = 83,
 
         #endregion
         // ====================================================================================

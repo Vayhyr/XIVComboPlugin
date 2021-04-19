@@ -204,6 +204,9 @@ namespace XIVComboExpandedestPlugin
             {
                 if (actionID == DRK.Souleater)
                 {
+                    var gauge = GetJobGauge<DRKGauge>().Blood;
+                    if (gauge >= 90 && Configuration.IsEnabled(CustomComboPreset.DRKOvercapFeature) && HasBuff(DRK.Buffs.BloodWeapon))
+                        return DRK.Bloodspiller;
                     if (Configuration.IsEnabled(CustomComboPreset.DeliriumFeature))
                         if (level >= DRK.Levels.Bloodpiller && level >= DRK.Levels.Delirium && HasBuff(DRK.Buffs.Delirium))
                             return DRK.Bloodspiller;
@@ -212,10 +215,24 @@ namespace XIVComboExpandedestPlugin
                     {
                         if (lastMove == DRK.HardSlash && level >= DRK.Levels.SyphonStrike)
                         {
+                            if (Configuration.IsEnabled(CustomComboPreset.DRKMPOvercapFeature))
+                            {
+                                if (mp > 8000)
+                                {
+                                    if (level >= DRK.Levels.FloodOfDarkness && level < DRK.Levels.EdgeOfDarkness)
+                                        return DRK.FloodOfDarkness;
+                                    if (level >= DRK.Levels.EdgeOfDarkness)
+                                        return GetIconHook.Original(actionManager, DRK.EdgeOfDarkness);
+                                }
+                            }
+                            if (gauge >= 90 && Configuration.IsEnabled(CustomComboPreset.DRKOvercapFeature) && HasBuff(DRK.Buffs.BloodWeapon))
+                                return DRK.Bloodspiller;
                             return DRK.SyphonStrike;
                         }
                         if (lastMove == DRK.SyphonStrike && level >= DRK.Levels.Souleater)
                         {
+                            if (((gauge >= 90) || (gauge >= 80 && HasBuff(DRK.Buffs.BloodWeapon)) && Configuration.IsEnabled(CustomComboPreset.DRKOvercapFeature)))
+                                return DRK.Bloodspiller;
                             return DRK.Souleater;
                         }
                     }
@@ -239,6 +256,13 @@ namespace XIVComboExpandedestPlugin
                     if (comboTime > 0)
                         if (lastMove == DRK.Unleash && level >= DRK.Levels.StalwartSoul)
                         {
+                            if (Configuration.IsEnabled(CustomComboPreset.DRKMPOvercapFeature))
+                            {
+                                if (mp > 8000)
+                                {
+                                    return GetIconHook.Original(actionManager, DRK.FloodOfDarkness);
+                                }
+                            }
                             if (((gauge >= 90) || (gauge >= 80 && HasBuff(DRK.Buffs.BloodWeapon)) && Configuration.IsEnabled(CustomComboPreset.DRKOvercapFeature)))
                                 return DRK.Quietus;
                             return DRK.StalwartSoul;
@@ -388,12 +412,21 @@ namespace XIVComboExpandedestPlugin
                     }
                     if (comboTime > 0)
                     {
+                        var gauge = GetJobGauge<WARGauge>().BeastGaugeAmount;
                         if (lastMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
                         {
+                            if (gauge == 100 && Configuration.IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature))
+                            {
+                                return GetIconHook.Original(actionManager, WAR.FellCleave);
+                            }
                             return WAR.Maim;
                         }
                         if (lastMove == WAR.Maim && level >= WAR.Levels.StormsPath)
                         {
+                            if (gauge >= 90 && Configuration.IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature))
+                            {
+                                return GetIconHook.Original(actionManager, WAR.FellCleave);
+                            }
                             return WAR.StormsPath;
                         }
                     }
@@ -414,12 +447,21 @@ namespace XIVComboExpandedestPlugin
 
                     if (comboTime > 0)
                     {
+                        var gauge = GetJobGauge<WARGauge>().BeastGaugeAmount;
                         if (lastMove == WAR.HeavySwing && level >= WAR.Levels.Maim)
                         {
+                            if (gauge == 100 && Configuration.IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature))
+                            {
+                                return GetIconHook.Original(actionManager, WAR.FellCleave);
+                            }
                             return WAR.Maim;
                         }
                         if (lastMove == WAR.Maim && level >= WAR.Levels.StormsEye)
                         {
+                            if (gauge == 100 && Configuration.IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature))
+                            {
+                                return GetIconHook.Original(actionManager, WAR.FellCleave);
+                            }
                             return WAR.StormsEye;
                         }
                     }
@@ -587,7 +629,11 @@ namespace XIVComboExpandedestPlugin
                     var gauge = GetJobGauge<SAMGauge>();
                     if (level >= SAM.Levels.Tsubame && gauge.Sen == Sen.NONE)
                     {
-                        return GetIconHook.Original(actionManager, SAM.Tsubame);
+                        var kaeshi = GetIconHook.Original(actionManager, SAM.Tsubame);
+                        if (kaeshi == SAM.TrashHiganbana)
+                            return SAM.Tsubame;
+                        else
+                            return kaeshi;
                     }
                     else
                     {
@@ -721,10 +767,11 @@ namespace XIVComboExpandedestPlugin
 
             if (Configuration.IsEnabled(CustomComboPreset.GunbreakerBloodfestOvercapFeature))
             {
-                if (actionID == GNB.BurstStrike)
+                if (actionID == GNB.Bloodfest)
                 {
-                    if (GetJobGauge<GNBGauge>().NumAmmo == 0 && level >= GNB.Levels.Bloodfest)
-                        return GNB.Bloodfest;
+                    if (GetJobGauge<GNBGauge>().NumAmmo >= 1)
+                        return GNB.BurstStrike;
+                    return GNB.Bloodfest;
                 }
             }
             // Replace Solid Barrel with Solid Barrel combo
@@ -738,6 +785,8 @@ namespace XIVComboExpandedestPlugin
                             return GNB.BrutalShell;
                         if (lastMove == GNB.BrutalShell && level >= GNB.Levels.SolidBarrel)
                         {
+                            if (GetJobGauge<GNBGauge>().NumAmmo == 2)
+                                return GNB.BurstStrike;
                             return GNB.SolidBarrel;
                         }
                     }
@@ -897,10 +946,37 @@ namespace XIVComboExpandedestPlugin
                     if (gauge.IsEnoActive())
                     {
                         if (gauge.InUmbralIce() && level >= BLM.Levels.Blizzard4)
+                        {
+                            if (gauge.ElementTimeRemaining >= 5000 && Configuration.IsEnabled(CustomComboPreset.BlackThunderFeature))
+                                if (HasBuff(BLM.Buffs.Thundercloud))
+                                    if ((BuffDuration(BLM.Buffs.Thundercloud) < 4 && BuffDuration(BLM.Buffs.Thundercloud) > 0) 
+                                        || (TargetHasBuff(BLM.Debuffs.Thunder3) && TargetBuffDuration(BLM.Debuffs.Thunder3) < 4))
+                                        return BLM.Thunder3;
                             return BLM.Blizzard4;
+                        }
                         if (level >= BLM.Levels.Fire4)
+                        {
+                            if (gauge.ElementTimeRemaining >= 6000 && Configuration.IsEnabled(CustomComboPreset.BlackThunderFeature))
+                                if (HasBuff(BLM.Buffs.Thundercloud))
+                                    if ((BuffDuration(BLM.Buffs.Thundercloud) < 4 && BuffDuration(BLM.Buffs.Thundercloud) > 0) 
+                                        || (TargetHasBuff(BLM.Debuffs.Thunder3) && TargetBuffDuration(BLM.Debuffs.Thunder3) < 4))
+                                        return BLM.Thunder3;
+                            if (gauge.ElementTimeRemaining < 3000 && HasBuff(BLM.Buffs.Firestarter) && Configuration.IsEnabled(CustomComboPreset.BlackFireFeature))
+                                return BLM.Fire3;
+                            if (mp < 2400 && level >= BLM.Levels.Despair && Configuration.IsEnabled(CustomComboPreset.BlackDespairFeature))
+                            {
+                                return BLM.Despair;
+                            }
+                            if (gauge.ElementTimeRemaining < 6000 && !HasBuff(BLM.Buffs.Firestarter) && Configuration.IsEnabled(CustomComboPreset.BlackFireFeature))
+                                return BLM.Fire;
                             return BLM.Fire4;
+                        }
                     }
+                    if (gauge.ElementTimeRemaining >= 5000 && Configuration.IsEnabled(CustomComboPreset.BlackThunderFeature) && level < BLM.Levels.Thunder3)
+                        if (HasBuff(BLM.Buffs.Thundercloud))
+                            if ((BuffDuration(BLM.Buffs.Thundercloud) < 4 && BuffDuration(BLM.Buffs.Thundercloud) > 0) 
+                                || (TargetHasBuff(BLM.Debuffs.Thunder) && TargetBuffDuration(BLM.Debuffs.Thunder) < 4))
+                                return BLM.Thunder;
                     if (level < BLM.Levels.Fire3)
                         return BLM.Fire;
                     if (gauge.InAstralFire() && (level < BLM.Levels.Enochian || gauge.IsEnoActive()))
@@ -914,14 +990,17 @@ namespace XIVComboExpandedestPlugin
                 }
             }
 
-            if (Configuration.IsEnabled(CustomComboPreset.BlackFire3Feature) && actionID == BLM.Fire)
+            if (Configuration.IsEnabled(CustomComboPreset.BlackFire3Feature) && actionID == BLM.Fire3)
             {
                 var gauge = GetJobGauge<BLMGauge>();
-                if (level >= BLM.Levels.Fire3 && !gauge.InAstralFire())
-                    return BLM.Fire3;
+                if (level < BLM.Levels.Fire3)
+                    return BLM.Fire;
                 if (gauge.InAstralFire())
+                {
                     if (HasBuff(BLM.Buffs.Firestarter))
                         return BLM.Fire3;
+                    return BLM.Fire;
+                }
             }
 
             if (Configuration.IsEnabled(CustomComboPreset.BlackBlizzardFeature))
@@ -1066,7 +1145,19 @@ namespace XIVComboExpandedestPlugin
                         return SMN.Painflare;
                     return SMN.EnergySyphon;
                 }
-            }   
+            }
+
+            // Egi Assault 1 & 2 become Ruin IV if Further Ruin is capped
+            if (Configuration.IsEnabled(CustomComboPreset.SummonerRuinIVFeature))
+            {
+                if ((actionID == SMN.EgiAssault || actionID == SMN.EgiAssault2) && HasBuff(SMN.Buffs.FurtherRuin) && BuffStacks(SMN.Buffs.FurtherRuin) == 4)
+                {
+                    var enkindle = GetIconHook.Original(actionManager, SMN.Enkindle);
+                    if (enkindle == SMN.Inferno)
+                        if (!(actionID == SMN.EgiAssault2 && level < SMN.Levels.EnhancedEgiAssault))
+                            return SMN.RuinIV;
+                }
+            }
 
             #endregion
             // ====================================================================================
@@ -1307,7 +1398,7 @@ namespace XIVComboExpandedestPlugin
                 }
             }
 
-            if (Configuration.IsEnabled(CustomComboPreset.BardIronJawsFeature))
+            if (Configuration.IsEnabled(CustomComboPreset.BardOneButtonDoT))
             {
                 if (actionID == BRD.IronJaws)
                 { 
@@ -1355,12 +1446,18 @@ namespace XIVComboExpandedestPlugin
                 {
                     if (HasBuff(MNK.Buffs.PerfectBalance) || HasBuff(MNK.Buffs.FormlessFist))
                     {
+                        if (!HasBuff(MNK.Buffs.TwinSnakes))
+                            return MNK.TwinSnakes;
+                        if (BuffDuration(MNK.Buffs.TwinSnakes) < 4)
+                            return MNK.FourPointFury;
                         return MNK.Rockbreaker;
                     }
                     if (HasBuff(MNK.Buffs.OpoOpoForm))
                         return MNK.ArmOfTheDestroyer;
                     if (HasBuff(MNK.Buffs.RaptorForm) && level >= MNK.Levels.FourPointFury)
                     {
+                        if (!HasBuff(MNK.Buffs.TwinSnakes))
+                            return MNK.TwinSnakes;
                         return MNK.FourPointFury;
                     }
                     if (HasBuff(MNK.Buffs.CoerlForm) && level >= MNK.Levels.Rockbreaker)
@@ -1378,6 +1475,22 @@ namespace XIVComboExpandedestPlugin
                     if (level < MNK.Levels.DragonKick)
                         return MNK.Bootshine;
                     return MNK.DragonKick;
+                }
+            }
+
+            if (Configuration.IsEnabled(CustomComboPreset.MnkDemolishFeature))
+            { 
+                if (actionID == MNK.SnapPunch)
+                {
+                    if (level < MNK.Levels.Demolish)
+                        return MNK.SnapPunch;
+                    if (TargetHasBuff(MNK.Debuffs.Demolish))
+                    {
+                        var duration = TargetBuffDuration(MNK.Debuffs.Demolish);
+                        if (duration > 6)
+                            return MNK.SnapPunch;
+                    }
+                    return MNK.Demolish;
                 }
             }
 
@@ -1445,6 +1558,22 @@ namespace XIVComboExpandedestPlugin
                     {
                         if ((lastMove == RDM.Verflare || lastMove == RDM.Verholy) && level >= RDM.Levels.Scorch)
                             return RDM.Scorch;
+
+                        if (lastMove == RDM.EnchantedRedoublement)
+                        {
+                            if (gauge.BlackGauge >= gauge.WhiteGauge && level >= RDM.Levels.Verholy)
+                            {
+                                if (HasBuff(RDM.Buffs.VerstoneReady) && !HasBuff(RDM.Buffs.VerfireReady) && (gauge.BlackGauge - gauge.WhiteGauge <= 9))
+                                    return RDM.Verflare;
+                                return RDM.Verholy;
+                            }
+                            else if (level >= RDM.Levels.Verflare)
+                            {
+                                if ((!HasBuff(RDM.Buffs.VerstoneReady) && HasBuff(RDM.Buffs.VerfireReady)) && level >= RDM.Levels.Verholy && (gauge.WhiteGauge - gauge.BlackGauge <= 9))
+                                    return RDM.Verholy;
+                                return RDM.Verflare;
+                            }
+                        }
                     }
 
                     return GetIconHook.Original(actionManager, RDM.Riposte);
