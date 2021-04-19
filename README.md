@@ -7,7 +7,7 @@ I apologize for any upset this might cause; it was ultimately something I felt l
 # XIVComboPlugin Expandedest
 This is an expanded version of Daemitus's XIVCombo Expanded for personal use, that I am modifying for personal use by adding features that me and friends would like to use. These can be used in any fork you like, no credit needed. None of these features will be added to the original XIVCombo, so please do not bug the creator of that about it. Thank you Daemitus, attickdoor, goaaats, and everyone else who contributed to making this plugin possible. Additional thanks to ALymphocyte for coding help!
 
-If you would like to use this plugin, you can get it from this repo: `https://github.com/grammernatzi/MyDalamudPlugins/raw/master/pluginmaster.json`
+If you would like to use this plugin, you can get it from this repo: `https://github.com/lushc/MyDalamudPlugins/raw/master/pluginmaster.json`
 
 ## Additions added (all optional!)
 

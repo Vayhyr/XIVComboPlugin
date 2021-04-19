@@ -39,7 +39,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        repository: grammernatzi/MyDalamudPlugins
+        repository: lushc/MyDalamudPlugins
         token: ${{ secrets.PAT }}
     - name: Download Artifact
       uses: actions/download-artifact@v2
