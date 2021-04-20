@@ -1398,7 +1398,7 @@ namespace XIVComboExpandedestPlugin
                 }
             }
 
-            if (Configuration.IsEnabled(CustomComboPreset.BardOneButtonDoT))
+            if (Configuration.IsEnabled(CustomComboPreset.BardIronJawsFeature))
             {
                 if (actionID == BRD.IronJaws)
                 { 

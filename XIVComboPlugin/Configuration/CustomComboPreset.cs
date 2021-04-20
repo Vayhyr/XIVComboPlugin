@@ -323,8 +323,8 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", BRD.JobID, BRD.HeavyShot, BRD.BurstShot)]
         BardStraightShotUpgradeFeature = 42,
 
-        [CustomComboInfo("One Button DoT", "Iron Jaws is replaced with Caustic Bite/Stormbite if one or both are not up.\nWorks for prior versions too, alternates between the two if Iron Jaws isn't available.", BRD.JobID, BRD.IronJaws)]
-        BardOneButtonDoT = 84,
+        [CustomComboInfo("Iron Jaws Feature", "Iron Jaws is replaced with Caustic Bite/Stormbite if one or both are not up.\nWorks for prior versions too, alternates between the two if Iron Jaws isn't available.", BRD.JobID, BRD.IronJaws)]
+        BardIronJawsFeature = 84,
 
         [CustomComboInfo("Burst Shot/Quick Nock into Apex Arrow", "Replaces Burst Shot and Quick Nock with Apex Arrow when gauge is full.", BRD.JobID, BRD.BurstShot, BRD.QuickNock)]
         BardApexFeature = 85,

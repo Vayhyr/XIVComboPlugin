@@ -40,7 +40,7 @@ If you would like to use this plugin, you can get it from this repo: `https://gi
 * Chi is replaced with Jin while Kassatsu is up if you have Enhanced Kassatsu to help with muscle memory.
 * Hide becomes Mug while in combat.
 * Your combos can become Ninjutsu while you are using Mudra (so you don't have to bind Ninjutsu separately, it doesn't actually do the Mudras for you).
-* One button DoT on Bard! Now all your DoTs are on the Iron Jaws button, and when both are applied, it becomes Iron Jaws. Best of all, this is per your active target, so you can DoT multiple targets just fine!
+* Bard DoTs alternate between each other and also turn into Iron Jaws when both are up.
 * Burst Shot/Quick Nock will turn into Apex Arrow when gauge is full.
 * One button weaving on Machinist, now Gauss Barrel will turn into Ricochet when you have more stacks of the latter!
 * Cascade, Flourish, and both Fan Dances change into dance steps while dancing. This helps ensure you can still dance with combos on, without using auto dance. You can additionally configure which actions you want to be replaced by dance steps, if you so desire.
