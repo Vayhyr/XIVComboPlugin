@@ -64,7 +64,6 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Requiescat Feature", "Replace Royal Authority/Goring Blade combo with Holy Spirit and Prominence combo with Holy Circle while Requiescat is active.\nRequires said combos to be activated to work.", PLD.JobID, PLD.RoyalAuthority, PLD.GoringBlade, PLD.Prominence)]
         PaladinRequiescatFeature = 63,
 
-        [SecretCustomCombo]
         [CustomComboInfo("Confiteor Feature", "Replace Holy Spirit/Circle with Confiteor while MP is under 4000 and Requiescat is up.", PLD.JobID, PLD.HolySpirit, PLD.HolyCircle)]
         PaladinConfiteorFeature = 68,
 
@@ -196,7 +195,6 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Overdrive Feature", "Replace Rook Autoturret and Automaton Queen with Overdrive while active", MCH.JobID, MCH.RookAutoturret, MCH.AutomatonQueen)]
         MachinistOverdriveFeature = 58,
 
-        [SecretCustomCombo]
         [CustomComboInfo("Gauss Round to Ricochet Feature", "Replace Gauss Round with Ricochet if Ricochet has more charges.", MCH.JobID, MCH.GaussRound)]
         MachinistGaussRicochetFeature = 95,
 
@@ -280,7 +278,6 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Fan Dance Combos", "Change Fan Dance and Fan Dance 2 into Fan Dance 3 while flourishing", DNC.JobID, DNC.FanDance1, DNC.FanDance2)]
         DancerFanDanceCombo = 33,
 
-        [SecretCustomCombo]
         [CustomComboInfo("Dance Step Combo", "Change Standard Step and Technical Step into each dance step while dancing", DNC.JobID, DNC.StandardStep, DNC.TechnicalStep)]
         DancerDanceStepCombo = 31,
 
@@ -357,7 +354,6 @@ namespace XIVComboExpandedestPlugin
         [CustomComboInfo("Redoublement Combo", "Replaces Redoublement with its combo chain, following enchantment rules", RDM.JobID, RDM.Redoublement)]
         RedMageMeleeCombo = 49,
 
-        [SecretCustomCombo]
         [CustomComboInfo("Redoublement Combo Plus", "Adds Verholy/VerFlare/Scorch to Redoublement Combo, based on procs and mana gauge.\nRequires Redoublement Combo.", RDM.JobID, RDM.Redoublement)]
         RedMageMeleeComboPlus = 78,
 
