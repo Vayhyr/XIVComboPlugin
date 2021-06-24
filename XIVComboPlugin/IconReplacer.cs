@@ -369,7 +369,7 @@ namespace XIVComboExpandedestPlugin
             }
 
             // Replace Holy Spirit/Circle with Requiescat if under 4000 MP
-            if (Configuration.IsEnabled(CustomComboPreset.PaladinRequiescatFeature))
+            if (Configuration.IsEnabled(CustomComboPreset.PaladinConfiteorFeature))
             {
                 if (actionID == PLD.HolySpirit)
                 {
@@ -489,6 +489,28 @@ namespace XIVComboExpandedestPlugin
                             return WAR.MythrilTempest;
                         }
                     return WAR.Overpower;
+                }
+            }
+
+            // Replace Overpower with Mythril Tempest combo
+            if (Configuration.IsEnabled(CustomComboPreset.WarriorOverpowerCombo))
+            {
+                if (actionID == WAR.Overpower)
+                {
+                    if (Configuration.IsEnabled(CustomComboPreset.WarriorInnerReleaseFeature) && HasBuff(WAR.Buffs.InnerRelease))
+                    {
+                        return GetIconHook.Original(actionManager, WAR.Decimate);
+                    }
+                    var gauge = GetJobGauge<WARGauge>().BeastGaugeAmount;
+                    if (comboTime > 0)
+                        if (lastMove == WAR.Overpower && level >= WAR.Levels.MythrilTempest)
+                        {
+                            if (gauge >= 90 && level >= WAR.Levels.MythrilTempestTrait && Configuration.IsEnabled(CustomComboPreset.WarriorGaugeOvercapFeature))
+                            {
+                                return GetIconHook.Original(actionManager, WAR.Decimate);
+                            }
+                            return WAR.MythrilTempest;
+                        }
                 }
             }
 
