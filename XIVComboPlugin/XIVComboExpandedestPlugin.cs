@@ -11,7 +11,7 @@ namespace XIVComboExpandedestPlugin
 {
     public class XIVComboExpandedestPlugin : IDalamudPlugin
     {
-        public string Name => "XIV Combo Expandedest Plugin";
+        public string Name => "XIV Combo Pro Esports Gamer Chair Edition Plugin";
         public string Command => "/pcombo";
 
         internal XIVComboExpandedestConfiguration Configuration;

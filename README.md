@@ -1,4 +1,11 @@
-# XIVComboPlugin Expandedest
+# XIVComboPlugin Pro Esports Gamer Chair Edition
+
+> :warning: This is a custom-tuned fork that's only safe for use by the **#1 ranked EU FFXIV gamer** with sufficient RGB installed into their gaming chair.
+
+> :warning: Before using this plugin you must link a Twitch account that has maintained a Tier 3 subscription for over 12 months.
+
+> :warning: This plugin may not function correctly unless your character is a Lalafell wearing the Toad Set glamour.
+
 This is an expanded version of Daemitus's XIVCombo Expanded for personal use, that I am modifying for personal use by adding features that me and friends would like to use. These can be used in any fork you like, no credit needed. None of these features will be added to the original XIVCombo, so please do not bug the creator of that about it. Thank you Daemitus, attickdoor, goaaats, and everyone else who contributed to making this plugin possible. Additional thanks to ALymphocyte for coding help!
 
 If you would like to use this plugin, you can get it from this repo: `https://github.com/lushc/MyDalamudPlugins/raw/master/pluginmaster.json`
