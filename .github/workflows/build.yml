@@ -11,7 +11,7 @@ on:
 env:
   SOLUTION_NAME: XIVCombo
   INTERNAL_NAME: XIVComboVayhyr
-  RELEASE_DIR: XIVComboPlugin\bin\Release\XIVCombo
+  RELEASE_DIR: XIVComboPlugin\bin\Release\XIVComboVayhyr
   PERSONAL_PLUGIN_REPO: Vayhyr/MyDalamudPlugins
 
 jobs:
