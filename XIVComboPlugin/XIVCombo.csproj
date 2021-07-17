@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Authors>attick, daemitus, grammernatzi</Authors>
+    <Authors>Vayhyr, ZM, attick, daemitus</Authors>
     <Company>-</Company>
-    <Version>1.1.0.1098</Version>
+    <Version>1.1.0.1</Version>
     <Description>This plugin condenses combos and mutually exclusive abilities onto a single button.</Description>
-    <Copyright>Copyleft my butt 2020 baybeeee</Copyright>
-    <PackageProjectUrl>https://github.com/lushc/XIVComboPluginProEsportsGamerChairEdition</PackageProjectUrl>
+    <Copyright>Copyleft attick 2020 baybeeee</Copyright>
+    <PackageProjectUrl>https://github.com/Vayhyr/XIVComboPlugin</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XIVComboExpandedestPlugin</RootNamespace>
-    <AssemblyName>XIVComboProEsportsGamerChairEdition</AssemblyName>
+    <RootNamespace>XIVComboExpandedPlugin</RootNamespace>
+    <AssemblyName>XIVComboVayhyr</AssemblyName>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFramework>net472</TargetFramework>
@@ -37,7 +37,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath> 
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -96,7 +96,7 @@
   -->
 
   <Target Name="PackagePlugin" AfterTargets="CleanOutDir" Condition=" '$(Configuration)' == 'Release' ">
-    <Message Text="Starting DalamudPackager" Importance="high"/>
+    <Message Text="Starting DalamudPackager" Importance="high" />
     <DalamudPackager ProjectDir="$(ProjectDir)" OutputPath="$(OutputPath)" AssemblyName="$(AssemblyName)" VersionComponents="4" MakeZip="true" />
   </Target>
 </Project>

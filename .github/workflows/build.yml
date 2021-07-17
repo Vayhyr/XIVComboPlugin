@@ -1,13 +1,18 @@
 name: Build
 
+# Put your personal access token in a repository secret named PAT for cross-repository access
+
 on: 
   workflow_dispatch:
   push:
     branches:
     - master
 
-env: 
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
+env:
+  SOLUTION_NAME: XIVCombo
+  INTERNAL_NAME: XIVComboVayhyr
+  RELEASE_DIR: XIVComboPlugin\bin\Release\XIVCombo
+  PERSONAL_PLUGIN_REPO: Vayhyr/MyDalamudPlugins
 
 jobs:
   build:
@@ -15,6 +20,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
     - name: Download Dalamud
@@ -23,33 +30,36 @@ jobs:
         Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"
     - name: Build
       run: |
-        dotnet restore -r win XIVCombo.sln
+        dotnet restore -r win ${{ env.SOLUTION_NAME }}.sln
         dotnet build --configuration Release
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      env: 
+        DOTNET_CLI_TELEMETRY_OPTOUT: true
+    - uses: actions/upload-artifact@v2
       with:
         name: PluginRepoZip
-        path: XIVComboPlugin\bin\Release\XIVComboProEsportsGamerChairEdition
+        path: ${{ env.RELEASE_DIR }}
         if-no-files-found: error
-  
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
-        repository: lushc/MyDalamudPlugins
+        repository: ${{ env.PERSONAL_PLUGIN_REPO }}
         token: ${{ secrets.PAT }}
-    - name: Download Artifact
-      uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v2
       with:
         name: PluginRepoZip
-        path: plugins/XIVComboProEsportsGamerChairEdition
-    - name: Add, Commit, and Push
-      uses: EndBug/add-and-commit@v7
+        path: plugins/${{ env.INTERNAL_NAME }}
+    - uses: actions/download-artifact@v2
+      if: "contains(toJSON(github.event.commits.*.message), '[TEST]')"
+      with:
+        name: PluginRepoZip
+        path: testing/${{ env.INTERNAL_NAME }}    
+    - uses: EndBug/add-and-commit@v7
       with:
         add: --all
         author_name: GitHub Action
         author_email: github-actions[bot]@users.noreply.github.com
-        message: Update XIVComboProEsportsGamerChairEdition
+        message: Update ${{ env.INTERNAL_NAME }}
