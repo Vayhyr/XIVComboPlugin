@@ -14,9 +14,9 @@ For some jobs, this frees a massive amount of hotbar space (looking at you, DRG)
   * For example, to use DRK's Souleater combo, first check the box, then place Souleater on your bar. It should automatically turn into Hard Slash.
   * The description associated with each combo should be enough to tell you which ability needs to be placed on the hotbar.
 ### Examples
-![](https://github.com/daemitus/xivcomboplugin/raw/master/res/souleater_combo.gif)
-![](https://github.com/daemitus/xivcomboplugin/raw/master/res/hypercharge_heat_blast.gif)
-![](https://github.com/daemitus/xivcomboplugin/raw/master/res/eno_swap.gif)
+![](https://github.com/vayhyr/xivcomboplugin/raw/master/res/souleater_combo.gif)
+![](https://github.com/vayhyr/xivcomboplugin/raw/master/res/hypercharge_heat_blast.gif)
+![](https://github.com/vayhyr/xivcomboplugin/raw/master/res/eno_swap.gif)
 
 ## Known Issues
 * None, for now!
@@ -66,7 +66,7 @@ New additions from the original plugin are noted with a 🟢 icon.
 | MCH | Spread Shot Heat | Replace Spread Shot with Auto Crossbow when overheated |
 | MCH | 🟢Hypercharge Feature | Replace Heat Blast and Auto Crossbow with Hypercharge when not overheated |
 | MCH | 🟢Overdrive Feature | Replace Rook Autoturret and Automaton Queen with Overdrive while active |
-<!--| MCH | 🟢Gauss Round Feature | Replace Gauss Round and Ricochet with one or the other depending on which has more charges |-->
+| MCH | 🟢Gauss Round Feature | Replace Gauss Round and Ricochet with one or the other depending on which has more charges |
 | BLM | Enochian Stance Switcher | Change Enochian to Fire 4 or Blizzard 4 depending on stance |
 | BLM | Umbral Soul/Transpose Switcher | Change Transpose into Umbral Soul when Umbral Soul is usable |
 | BLM | (Between the) Ley Lines | Change Ley Lines into BTL when Ley Lines is active |
@@ -80,7 +80,7 @@ New additions from the original plugin are noted with a 🟢 icon.
 | SCH | Seraph Fey Blessing/Consolation | Change Fey Blessing into Consolation when Seraph is out |
 | SCH | ED Aetherflow | Change Energy Drain into Aetherflow when you have no more Aetherflow stacks |
 | DNC | Fan Dance Combos | Change Fan Dance and Fan Dance 2 into Fan Dance 3 while flourishing |
-<!--| DNC | 🟢Dance Step Combo | Change Standard Step and Technical Step into each dance step while dancing |-->
+| DNC | 🟢Dance Step Combo | Change Standard Step and Technical Step into each dance step while dancing |
 | DNC | 🟢Flourish Proc Saver | Change Flourish into any available procs before using |
 | DNC | 🟢Single Target Multibutton | Change Cascade into procs and combos as available |
 | DNC | 🟢AoE Multibutton | Change Windmill into procs and combos as available |
